@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Dive: Turning My Car into a Real-Life Mario Kart | Ethan Gibbs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts and icons similar to your main site -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        header, nav, footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        header .logo {
+            font-family: 'Russo One', sans-serif;
+            font-size: 2.5rem;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .hero {
+            background: url('images/obd2-blog-hero.jpg') center center/cover no-repeat;
+            height: 250px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-family: 'Russo One', sans-serif;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .container h2 {
+            font-family: 'Russo One', sans-serif;
+            margin-top: 25px;
+            color: #222;
+        }
+        .container h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .container p, .container li {
+            margin: 15px 0;
+            font-size: 1rem;
+        }
+        .container ul {
+            margin-left: 20px;
+        }
+        pre {
+            background: #eee;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        footer a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Ethan Gibbs</div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Deep Dive: Real-Life Mario Kart &amp; OBD2 Mayhem</h1>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <a class="back-link" href="index.html#">&larr; Back to Projects</a>
+        
+        <!-- Introduction and Motivations -->
+        <h2>Curiosity: Turning Fantasy into Reality</h2>
+        <p>
+            Not too long ago, I found myself pondering as I played Mario Kart on my Nintendo Switch. 
+            Personally, I'm not a big fan of the Switch controls, so I was thinking about how I could change my control inputs to something more comfortable.
+            During this brainstorming session, I had a funny idea: What if I used my car to control the game?
+        </p>
+        <p>
+            Now this was nothing more than a thought created out of boredom, but... it really got me thinking. Would something like this even be possible? 
+            Fueled curiosity and a pinch of madness, I embarked on a project that promised to transform my car into a makeshift Mario Kart controller. 
+            Sounds insane, right? I thought so too until I started digging deeper.
+        </p>
+        
+        <img src="images/blog-images/mario-kart.gif" alt="Mario Kart Real Life Concept" style="display: block; max-width: 40%; margin: 20px auto; border-radius: 10px;">
+        
+        <!-- Research Phase: Discovering OBD2 -->   
+        <h2>The Great Data Hunt: Discovering OBD2</h2>
+        <p>
+            My first step was research. 
+            At this point I have no idea what I'm doing, so I spend hours scouring forums, articles, and YouTube videos until I figured that OBD2 (On-Board Diagnostics II) was the way to go. 
+            OBD2 is the standardized system that lets modern cars post their data somewhere including its speed, engine RPM, fuel data, and a lot more info. 
+            This is transmitted through a stream of raw CAN messages.
+        </p>
+        <p>
+            So to be able to listen to my car, I needed a way to tap into this data stream.
+            Since the OBD2 port is under the dashboard, all I need is a device that can read the data and send it to my laptop through some special cables.
+            
+        </p>
+        
+        <!-- Hardware & Setup: The Raspberry Pi and the Mysterious Cable -->
+        <h2>Hardware &amp; Setup: USB2CAN Module &amp; Jumper Wires</h2>
+        <p>
+            To interface with my car’s OBD‑II port, I used the InnoMaker USB2CAN module. 
+            It’s a self‑contained CAN transceiver with an onboard STM32 microcontroller that plugs straight into my laptop’s USB port—no Raspberry Pi or extra SBC required.
+        </p>
+
+        <p>
+            I then bought an OBD2 to DB9 cable to plug into the microcontroller. 
+            I was escatic to test my new doohickey ASAP and I plugged it into my laptop to find... absolutely nothing happening. 
+            Yeah, it turns out the OBD2 cable had a different pinout than my car's port
+            (duly noted: always do proper research before impulse purchases).
+        </p>
+        
+        <p>
+            Me being on a college student budget, I didn't want to buy another cable.
+            So I asked my TA for permission to take a few jumper wires from our lab. At first he was reluctant, but after telling him about my project, he had a seemed to be impressed enough and thankfully agreed.
+        </p>
+        
+        <p>
+            After that, I did a quick dive through my cars manual and I confirmed the pinout, connected the jumper wires accordingly, and I was good to go. 
+        </p>
+        <!-- USB2CAN module image -->
+        <img src="images/blog-images/cables.jpg" 
+        alt="InnoMaker USB2CAN Module" 
+        style="display:block;max-width:100%;margin:20px auto;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+        
+        <p>
+            With the module connected, I installed the <code>python-can</code> library on my laptop:
+        </p>
+        <pre>
+            pip3 install python-can
+        </pre>
+        <p>
+            Then I configured SocketCAN (on Linux) to bind the virtual device to <code>can0</code>:
+        </p>
+        <pre>
+            sudo ip link set can0 up type can bitrate 500000
+            sudo ifconfig can0 txqueuelen 1000
+        </pre>
+        <p>
+            Finally, a short Python script to capture and log CAN messages:
+        </p>
+        <pre>
+            import can
+            
+            bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=500000)
+            for msg in bus:
+            print(f"{msg.timestamp:.6f}  ID:{msg.arbitration_id:X}  Data:{msg.data.hex().upper()}")
+        </pre>
+        <p>
+            Now my laptop reads the car’s CAN bus directly, logging every frame for visualization and eventual control automation.
+        </p>
+        
+        <!-- The Hexadecimal Horror Show -->
+        <h2>The Hexadecimal Horror Show</h2>
+        <p>
+            Now the data dump. My terminal started spitting out thousands of lines like these <i>each second:</i>
+        </p>
+        <pre>
+            (1722899760.287644) can0 43F#004061FF71480A00
+            (1722899760.287825) can0 220#C303000000002410
+            (1722899760.288147) can0 164#000800000000060E
+            (1722899760.288372) can0 1F1#0000000000000000
+            (1722899760.288623) can0 370#0020008800000000
+            ...
+        </pre>
+        <p>
+            At first, I was euphoric. I spent several hours researching and preparing for every intricate detail of this project... up to this point. 
+        </p>
+
+        <p>
+            Once the excitement wore off, I realized I was staring at nothing more than a wall of hexadecimal gibberish.
+            I had no idea what any of it meant. If I was expecting to see something like "Speed: 60 mph" or "Engine Temp: 180°F," I was sorely mistaken.
+        </p>
+
+        <p>
+            I felt like a kid who just opened a treasure chest, only to find it filled with rocks instead of gold. 
+            I had no clue how to interpret the data, and the online resources were as helpful as a GPS in a black hole.
+        </p>
+
+        <p>
+            See, the problem is is that each car model—and even each year—seems to have its own way of communicating. My 2013 Hyundai Elantra was speaking in a dialect that no one had documented online. The reason is because car makers treat the hex decoding as intellectual property. In other words, <b>they do not post what this diagnostic data means anywhere.</b>
+        </p>
+
+        <p>
+            Panic started to set in: what am I supposed to do with this data now? Did I just waste all this time and money on a project that was going nowhere? Do I really have nothing to show for this?
+
+        <p>
+            But as I was getting ready to wallow in my own despair, I realized something. In the hexadecimal mess, there were some patterns. The first three characters of hex were the IDs, meaning they correlated to specific car functions (e.g speed, RPM, etc).
+            The rest of characters after that was the actual value of those IDs.
+        </p>
+
+        <p>
+            Putting this idea fully together, it began to register to me that if I wanted to see this project fully, I would have to reverse engineer possibly hundreds of seemingly random hex values if I wanted any actionable data. 
+        </p>
+
+        <p>
+            Challenge accepted.
+        </p>
+        
+        <!-- Decoding the Data -->
+        <h2>Decoding the Data: Test Drives and Visualizations</h2>
+        <p>
+            With a newfound determination, I took my car out for a series of test drives. I recorded the raw data as I performed various maneuvers—accelerating, braking, turning—and then cross-referenced the changes in the hexadecimal messages.
+        </p>
+        <p>
+            Mind you, I can't just pick a random hex ID in this data and compare it to see how it changed over time. Just as a reminder, the stream gives thousands of lines of data each second, so even a short test drive is an immensely huge file to fish through.
+            So I had to come up with a better plan. 
+        </p>
+        <p>
+            To get around this roadblock, I decided to build an entire visualization dashboard on my laptop. This is a python program that features live charts that plot the data over time. Since the data already has timestamps and the hex values correspond from 0-255 in decimal, this was relatively simple. 
+        </p>
+        <p>
+            I added controls that let me select individual hex values and view their corresponding timelines. In theory, this will allow me to pinpoint which numbers are tied to specific functions, like speed changes or steering adjustments.
+        </p>
+        <img src="images/blog-images/data.png"
+        alt="Speed Data Visualization" 
+        style="display:block;max-width:80%;margin:20px auto;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+        <p>
+            The dashboard was a game changer. By correlating the timing of my test drives with the data spikes and dips on the charts, I could start decoding the car’s communication protocol.
+        </p>
+
+        <p>
+            I will bore you with the details of the decoding process, but I will say that it was a mix of trial and error, educated guesses, and a lot of caffeine.
+            Overall, the process of creating the application and decoding enough IDs took up most of this projects time. It was at least two weeks of my life and an endless amount of headaches.
+        </p>
+
+        <p>
+            Long story short, I reverse engineered dozens of data points and mapped them to specific car functions. Now, Mario Kart time.
+        </p>
+        
+        <!-- Integration: Automating Control Inputs -->
+        <h2>Bringing It All Together</h2>
+        <p>
+            With a solid understanding of the data, the next step was integration. I connected the live CAN bus data to my laptop and used <code>pyautogui</code> to automate keyboard inputs based on the incoming data.
+            In essence, if a certain hex value indicated that I was stepping on the brake pedal, the script simulated pressing 'W' on my keyboard. Certain values of my steering wheel angle would correspond to 'A' and 'D' for left and right turns, respectively.
+        </p>
+        <p>
+            Finally, I connected everything to Dolphin Simulator running a Mario Kart ROM. Take a look at the video below to see the final result:
+        </p>
+        
+        <video 
+        src="images/blog-images/finalresult.mov"" 
+        controls 
+        autoplay 
+        muted 
+        loop 
+        style="display:block; max-width:45%; margin:20px auto; border-radius:8px;">
+        Your browser does not support the video tag.
+        </video>
+
+        <!-- Conclusion -->
+        <h2>Conclusion: A Wild Ride from Fantasy to Function</h2>
+        <p>
+            This project was a wild ride. I learned a lot about OBD2, CAN bus communication, and the intricacies of automotive data. 
+            I also learned that sometimes the most ridiculous ideas can lead to the most rewarding experiences.
+        </p>
+
+        <p>
+            In the end, my project evolved from a whimsical thought experiment into a full-blown adventure in automotive data hacking. I navigated unreadable hex codes, tamed a rebellious 2013 Hyundai Elantra’s data stream, and turned raw information into a dynamic control system for a Mario Kart dream.
+        </p>
+        <p>
+            And always keep a sense of humor—after all, who else would think of turning their car into a real-life video game controller?
+        </p>
+        
+        <a class="back-link" href="projects.html">&larr; Back to Projects</a>
+    </div>
+    
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ethan Gibbs. All rights reserved.</p>
+        <div id="contact-cards">
+            <a href="https://github.com/iiEthan" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/ethan-gibbs/" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2zDE+JwF5B770wC2ANi/20iGwk9l+NeMc4o9sOFswMn2f6hcqV7H5gHbnr2"
+    crossorigin="anonymous"></script>
+</body>
+</html>
