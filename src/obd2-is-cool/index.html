@@ -179,7 +179,7 @@
             To interface with my car’s OBD‑II port, I used the InnoMaker USB2CAN module. 
             It’s a self‑contained CAN transceiver with an onboard STM32 microcontroller that plugs straight into my laptop’s USB port—no Raspberry Pi or extra SBC required.
         </p>
-
+        
         <p>
             I then bought an OBD2 to DB9 cable to plug into the microcontroller. 
             I was escatic to test my new doohickey ASAP and I plugged it into my laptop to find... absolutely nothing happening. 
@@ -243,95 +243,95 @@
         <p>
             At first, I was euphoric. I spent several hours researching and preparing for every intricate detail of this project... up to this point. 
         </p>
-
+        
         <p>
             Once the excitement wore off, I realized I was staring at nothing more than a wall of hexadecimal gibberish.
             I had no idea what any of it meant. If I was expecting to see something like "Speed: 60 mph" or "Engine Temp: 180°F," I was sorely mistaken.
         </p>
-
+        
         <p>
             I felt like a kid who just opened a treasure chest, only to find it filled with rocks instead of gold. 
             I had no clue how to interpret the data, and the online resources were as helpful as a GPS in a black hole.
         </p>
-
+        
         <p>
             See, the problem is is that each car model—and even each year—seems to have its own way of communicating. My 2013 Hyundai Elantra was speaking in a dialect that no one had documented online. The reason is because car makers treat the hex decoding as intellectual property. In other words, <b>they do not post what this diagnostic data means anywhere.</b>
         </p>
-
+        
         <p>
             Panic started to set in: what am I supposed to do with this data now? Did I just waste all this time and money on a project that was going nowhere? Do I really have nothing to show for this?
-
-        <p>
-            But as I was getting ready to wallow in my own despair, I realized something. In the hexadecimal mess, there were some patterns. The first three characters of hex were the IDs, meaning they correlated to specific car functions (e.g speed, RPM, etc).
-            The rest of characters after that was the actual value of those IDs.
-        </p>
-
-        <p>
-            Putting this idea fully together, it began to register to me that if I wanted to see this project fully, I would have to reverse engineer possibly hundreds of seemingly random hex values if I wanted any actionable data. 
-        </p>
-
-        <p>
-            Challenge accepted.
-        </p>
-        
-        <!-- Decoding the Data -->
-        <h2>Decoding the Data: Test Drives and Visualizations</h2>
-        <p>
-            With a newfound determination, I took my car out for a series of test drives. I recorded the raw data as I performed various maneuvers—accelerating, braking, turning—and then cross-referenced the changes in the hexadecimal messages.
-        </p>
-        <p>
-            Mind you, I can't just pick a random hex ID in this data and compare it to see how it changed over time. Just as a reminder, the stream gives thousands of lines of data each second, so even a short test drive is an immensely huge file to fish through.
-            So I had to come up with a better plan. 
-        </p>
-        <p>
-            To get around this roadblock, I decided to build an entire visualization dashboard on my laptop. This is a python program that features live charts that plot the data over time. Since the data already has timestamps and the hex values correspond from 0-255 in decimal, this was relatively simple. 
-        </p>
-        <p>
-            I added controls that let me select individual hex values and view their corresponding timelines. In theory, this will allow me to pinpoint which numbers are tied to specific functions, like speed changes or steering adjustments.
-        </p>
-        <img src="images/blog-images/data.png"
-        alt="Speed Data Visualization" 
-        style="display:block;max-width:80%;margin:20px auto;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.2);">
-        <p>
-            The dashboard was a game changer. By correlating the timing of my test drives with the data spikes and dips on the charts, I could start decoding the car’s communication protocol.
-        </p>
-
-        <p>
-            I will bore you with the details of the decoding process, but I will say that it was a mix of trial and error, educated guesses, and a lot of caffeine.
-            Overall, the process of creating the application and decoding enough IDs took up most of this projects time. It was at least two weeks of my life and an endless amount of headaches.
-        </p>
-
-        <p>
-            Long story short, I reverse engineered dozens of data points and mapped them to specific car functions. Now, Mario Kart time.
-        </p>
-        
-        <!-- Integration: Automating Control Inputs -->
-        <h2>Bringing It All Together</h2>
-        <p>
-            With a solid understanding of the data, the next step was integration. I connected the live CAN bus data to my laptop and used <code>pyautogui</code> to automate keyboard inputs based on the incoming data.
-            In essence, if a certain hex value indicated that I was stepping on the brake pedal, the script simulated pressing 'W' on my keyboard. Certain values of my steering wheel angle would correspond to 'A' and 'D' for left and right turns, respectively.
-        </p>
-        <p>
-            Finally, I connected everything to Dolphin Simulator running a Mario Kart ROM. Take a look at the video below to see the final result:
-        </p>
-        
-        <video 
-        src="images/blog-images/finalresult.mov"" 
-        controls 
-        autoplay 
-        muted 
-        loop 
-        style="display:block; max-width:45%; margin:20px auto; border-radius:8px;">
-        Your browser does not support the video tag.
+            
+            <p>
+                But as I was getting ready to wallow in my own despair, I realized something. In the hexadecimal mess, there were some patterns. The first three characters of hex were the IDs, meaning they correlated to specific car functions (e.g speed, RPM, etc).
+                The rest of characters after that was the actual value of those IDs.
+            </p>
+            
+            <p>
+                Putting this idea fully together, it began to register to me that if I wanted to see this project fully, I would have to reverse engineer possibly hundreds of seemingly random hex values if I wanted any actionable data. 
+            </p>
+            
+            <p>
+                Challenge accepted.
+            </p>
+            
+            <!-- Decoding the Data -->
+            <h2>Decoding the Data: Test Drives and Visualizations</h2>
+            <p>
+                With a newfound determination, I took my car out for a series of test drives. I recorded the raw data as I performed various maneuvers—accelerating, braking, turning—and then cross-referenced the changes in the hexadecimal messages.
+            </p>
+            <p>
+                Mind you, I can't just pick a random hex ID in this data and compare it to see how it changed over time. Just as a reminder, the stream gives thousands of lines of data each second, so even a short test drive is an immensely huge file to fish through.
+                So I had to come up with a better plan. 
+            </p>
+            <p>
+                To get around this roadblock, I decided to build an entire visualization dashboard on my laptop. This is a python program that features live charts that plot the data over time. Since the data already has timestamps and the hex values correspond from 0-255 in decimal, this was relatively simple. 
+            </p>
+            <p>
+                I added controls that let me select individual hex values and view their corresponding timelines. In theory, this will allow me to pinpoint which numbers are tied to specific functions, like speed changes or steering adjustments.
+            </p>
+            <img src="images/blog-images/data.png"
+            alt="Speed Data Visualization" 
+            style="display:block;max-width:80%;margin:20px auto;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+            <p>
+                The dashboard was a game changer. By correlating the timing of my test drives with the data spikes and dips on the charts, I could start decoding the car’s communication protocol.
+            </p>
+            
+            <p>
+                I will bore you with the details of the decoding process, but I will say that it was a mix of trial and error, educated guesses, and a lot of caffeine.
+                Overall, the process of creating the application and decoding enough IDs took up most of this projects time. It was at least two weeks of my life and an endless amount of headaches.
+            </p>
+            
+            <p>
+                Long story short, I reverse engineered dozens of data points and mapped them to specific car functions. Now, Mario Kart time.
+            </p>
+            
+            <!-- Integration: Automating Control Inputs -->
+            <h2>Bringing It All Together</h2>
+            <p>
+                With a solid understanding of the data, the next step was integration. I connected the live CAN bus data to my laptop and used <code>pyautogui</code> to automate keyboard inputs based on the incoming data.
+                In essence, if a certain hex value indicated that I was stepping on the brake pedal, the script simulated pressing 'W' on my keyboard. Certain values of my steering wheel angle would correspond to 'A' and 'D' for left and right turns, respectively.
+            </p>
+            <p>
+                Finally, I connected everything to Dolphin Simulator running a Mario Kart ROM. Take a look at the video below to see the final result:
+            </p>
+            
+            <video 
+            src="images/blog-images/finalresult.mov"
+            controls 
+            autoplay 
+            muted 
+            loop 
+            style="display:block; max-width:45%; margin:20px auto; border-radius:8px;">
+            Your browser does not support the video tag.
         </video>
-
+        
         <!-- Conclusion -->
         <h2>Conclusion: A Wild Ride from Fantasy to Function</h2>
         <p>
             This project was a wild ride. I learned a lot about OBD2, CAN bus communication, and the intricacies of automotive data. 
             I also learned that sometimes the most ridiculous ideas can lead to the most rewarding experiences.
         </p>
-
+        
         <p>
             In the end, my project evolved from a whimsical thought experiment into a full-blown adventure in automotive data hacking. I navigated unreadable hex codes, tamed a rebellious 2013 Hyundai Elantra’s data stream, and turned raw information into a dynamic control system for a Mario Kart dream.
         </p>
